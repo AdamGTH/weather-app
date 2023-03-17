@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pogodynka</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css"
+    />
+  </head>
+  <body>
+    <form action="#" id="weatherForm" label="wpisz miasto">
+      <label for="miasto">Wybierz miasto</label><br />
+      <input type="text" name="cityName" value="" />
+      <input type="hidden" name="country" value="" />
+      <button>OK</button>
+    </form>
+
+    <header>
+      <h1><span class="city-name">Kraków</span>, <small>PL</small></h1>
+      <h2>Dziś</h2>
+    </header>
+    <main>
+      <section class="weather">
+        <span class="weather__icon">
+          <i class="wi wi-day-sunny"></i>
+        </span>
+        <span class="weather__temperature">20&deg;C</span>
+      </section>
+
+      <div class="weather-details">
+        <section class="card air">
+          <div class="card__item"><i class="wi wi-humidity"></i> 96%</div>
+          <div class="card__item"><i class="wi wi-barometer"></i> 1016 hPa</div>
+        </section>
+        <section class="card wind">
+          <div class="card__item">
+            <i class="wi wi-direction-down-right"></i> 225&deg;
+          </div>
+          <div class="card__item">
+            <i class="wi wi-strong-wind"></i> 2.68m/s
+          </div>
+        </section>
+      </div>
+
+      <h3>Godziny</h3>
+      <ol class="forecast-hours">
+        <li class="card card--small card--centered">
+          <time class="card__item forecast__hour">03:00</time>
+          <div class="card__item forecast__icon">
+            <i class="wi wi-night-alt-cloudy-high"></i>
+          </div>
+          <div class="card__item forecast__temperature">12&deg;C</div>
+        </li>
+        <li class="card card--small card--centered">
+          <time class="card__item forecast__hour">06:00</time>
+          <div class="card__item forecast__icon">
+            <i class="wi wi-night-alt-cloudy-high"></i>
+          </div>
+          <div class="card__item forecast__temperature">12&deg;C</div>
+        </li>
+        <li class="card card--small card--centered">
+          <time class="card__item forecast__hour">
+            09:00
+            <div class="card__item"></div>
+          </time>
+          <div class="card__item forecast__icon">
+            <i class="wi wi-night-alt-cloudy-high"></i>
+          </div>
+          <div class="card__item forecast__temperature">12&deg;C</div>
+        </li>
+        <li class="card card--small card--centered">
+          <time class="card__item forecast__hour">12:00</time>
+          <div class="card__item forecast__icon">
+            <i class="wi wi-night-alt-cloudy-high"></i>
+          </div>
+          <div class="card__item forecast__temperature">12&deg;C</div>
+        </li>
+      </ol>
+
+      <div class="forec">
+        <ol class="lol" style="list-style: none">
+          <li class="day"><canvas id="f_day"></canvas></li>
+          <li class="day"><canvas id="s_day"></canvas></li>
+          <li class="day"><canvas id="t_day"></canvas></li>
+          <li class="day"><canvas id="fo_day"></canvas></li>
+          <li class="day"><canvas id="fi_day"></canvas></li>
+        </ol>
+      </div>
+    </main>
+    <script src="js/script.js"></script>
+  </body>
+</html>

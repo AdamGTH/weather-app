@@ -1,0 +1,169 @@
+body {
+  font-family: “Poppins”, sans-serif;
+  padding: 16px;
+  background: rgb(87, 112, 112);
+  background: linear-gradient(
+    0deg,
+    rgba(87, 112, 112, 1) 0%,
+    rgba(205, 175, 131, 1) 100%
+  );
+}
+h1,
+h3,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: 33px;
+  line-height: 49px;
+  text-transform: capitalize;
+}
+h1 small {
+  font-size: 15px;
+}
+h2 {
+  font-size: 23px;
+  line-height: 34px;
+  font-weight: 400;
+}
+h3 {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
+}
+.weather {
+  background: rgb(153, 158, 123);
+  background: linear-gradient(
+    90deg,
+    rgba(153, 158, 123, 1) 0%,
+    rgba(218, 195, 11, 1) 48%,
+    rgba(62, 73, 21, 1) 100%
+  );
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.03), 0px 4px 7px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 16px;
+}
+.weather__icon {
+  height: 100px;
+  text-align: center;
+  font-size: 80px;
+}
+.weather__temperature {
+  font-size: 46px;
+  line-height: 69px;
+  font-weight: 700;
+}
+.error-msg {
+  background: hsla(20, 100%, 95%);
+  box-shadow: 0px 1px 1px hsla(20, 100%, 60%, 0.09),
+    0px 4px 7px hsla(20, 100%, 60%, 0.2);
+  border: 1px solid hsl(20, 100%, 40%);
+  color: #c40;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 20px;
+}
+.error-msg--hidden {
+  display: none;
+}
+.card {
+  background: rgb(161, 166, 139);
+  background: radial-gradient(
+    circle,
+    rgba(161, 166, 139, 1) 47%,
+    rgba(133, 133, 133, 1) 100%
+  );
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.03), 0px 4px 7px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card__item {
+  margin-bottom: 16px;
+}
+.card--centered {
+  align-items: center;
+}
+.card--small {
+  padding: 12px;
+}
+.card--small .card__item {
+  margin-bottom: 8px;
+}
+.card__item:last-child {
+  margin: 0;
+}
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+.weather-details .wi {
+  display: inline-block;
+  width: 16px;
+  padding-right: 8px;
+  text-align: center;
+}
+.forecast-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 8px 0;
+  padding: 0;
+}
+.forecast__hour.card__item {
+  font-size: 13px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.forecast__temperature {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 700;
+}
+@media (min-width: 350px) {
+  .weather {
+    flex-direction: row;
+  }
+}
+@media (min-width: 400px) {
+  .weather-details,
+  .forecast-hours {
+    flex-direction: row;
+  }
+}
+
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+.day {
+  /* min-height: 600px;
+  min-width: 800px; */
+  background: rgb(161, 166, 139);
+  background: radial-gradient(
+    circle,
+    rgba(161, 166, 139, 1) 47%,
+    rgba(133, 133, 133, 1) 100%
+  );
+  margin: 50px 0 50px;
+  color: rgb(229, 19, 19);
+}
