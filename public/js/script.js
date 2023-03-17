@@ -241,7 +241,7 @@ function draw_chart(id, data, nr_day) {
     },
 
     options: {
-      aspectRatio: 1, // skala
+      aspectRatio: 2, // skala
       scales: {
         y: {
           max: 40,
@@ -279,7 +279,7 @@ function draw_chart(id, data, nr_day) {
           },
           font: {
             weight: "bold",
-            size: 14,
+            size: 12,
           },
         },
       },
