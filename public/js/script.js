@@ -9,7 +9,7 @@ function image_src(ico) {
 document.querySelector("form").addEventListener("submit", function (event) {
   event.preventDefault(); // nie wywołuje się to co jest w action
 
-  // const city = event.target.cityName.value;
+  city = event.target.cityName.value;
 
   Promise.all([fetchWeather(city), fetchForecast(city)])
     .then(transformData)
@@ -19,14 +19,6 @@ document.querySelector("form").addEventListener("submit", function (event) {
       console.log(error);
     });
 });
-
-Promise.all([fetchWeather(city), fetchForecast(city)])
-  .then(transformData)
-  .then(draw_charts)
-  .then(update)
-  .catch(function (error) {
-    console.log(error);
-  });
 
 const iconMap = new Map([
   // lub Map ale set nie pozwoli dublować danych
@@ -182,7 +174,7 @@ function ret(element) {
   };
 }
 
-Chart.defaults.borderColor = "#36A2EB"; // kolory siatki
+//Chart.defaults.borderColor = "gray"; // kolory siatki
 Chart.defaults.color = "black"; // ustawianie kolorów liczb na osi x i y
 Chart.register(ChartDataLabels);
 function draw_chart(id, data, nr_day) {
@@ -200,7 +192,12 @@ function draw_chart(id, data, nr_day) {
   data.forecastx[nr_day].forEach((element) => {
     xValues.push(element.date_hour);
     yValues.push(element.temp);
-    colors.push("rgba(54, 162, 235, 0.2)");
+    if (element.temp < 0) colors.push("#0b40b8");
+    else if (element.temp > 0 && element.temp < 10) colors.push("#0bb8b3");
+    else if (element.temp > 10 && element.temp < 15) colors.push("#0bb850");
+    else if (element.temp > 15 && element.temp < 23) colors.push("#97b80b");
+    else if (element.temp > 23 && element.temp < 25) colors.push("#b8790b");
+    else if (element.temp > 25) colors.push("#b8250b");
   });
 
   let data_plugins = {
@@ -238,7 +235,7 @@ function draw_chart(id, data, nr_day) {
         {
           borderWidth: 2,
           data: yValues,
-          backgroundColor: [colors],
+          backgroundColor: colors,
         },
       ],
     },
