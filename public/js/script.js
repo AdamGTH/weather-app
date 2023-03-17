@@ -204,6 +204,7 @@ function draw_chart(id, data, nr_day) {
     id: "data_plugins",
     afterDatasetDraw(chart, args, options) {
       const { ctx } = chart;
+      console.log(chart.getDatasetMeta(0).data[i]);
       ctx.save();
       ctx.legend = options.legend;
       ctx.title = options.title;
@@ -244,8 +245,8 @@ function draw_chart(id, data, nr_day) {
       aspectRatio: 2, // skala
       scales: {
         y: {
-          max: 40,
-          min: -40,
+          max: 50,
+          min: -50,
           ticks: {
             callback: function (value, index, ticks) {
               return value + "°C";
@@ -264,7 +265,7 @@ function draw_chart(id, data, nr_day) {
           text: data.forecastx[nr_day][0].date_day,
           color: "black",
           font: {
-            size: 18,
+            size: 16,
           },
         },
         legend: {
