@@ -241,7 +241,7 @@ function draw_chart(id, data, nr_day) {
     },
 
     options: {
-      aspectRatio: 3, // skala
+      aspectRatio: 1, // skala
       scales: {
         y: {
           max: 40,
