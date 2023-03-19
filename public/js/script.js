@@ -185,13 +185,11 @@ function draw_chart(id, data, nr_day, update) {
   let colors = [];
   let img_tab_ico = [];
   let img_weath = new Image();
-  let chart_current = {};
 
   for (i = 0; i < data.forecastx[nr_day].length; i++) {
     img_weath.src = data.forecastx[nr_day][i].img_src;
     img_tab_ico.push(img_weath);
   }
-
   data.forecastx[nr_day].forEach((element) => {
     xValues.push(element.date_hour);
     yValues.push(element.temp);
@@ -229,7 +227,6 @@ function draw_chart(id, data, nr_day, update) {
 
   chart_tab[nr_day] = new Chart(id_chart, {
     type: "bar",
-
     data: {
       labels: xValues,
       datasets: [
@@ -240,7 +237,6 @@ function draw_chart(id, data, nr_day, update) {
         },
       ],
     },
-
     options: {
       aspectRatio: 1, // skala
       scales: {
@@ -284,18 +280,11 @@ function draw_chart(id, data, nr_day, update) {
           },
         },
       },
-
-      // deferred: {
-      //   xOffset: 150, // defer until 150px of the canvas width are inside the viewport
-      //   yOffset: "50%", // defer until 50% of the canvas height are inside the viewport
-      //   delay: 500, // delay of 500 ms after the canvas is considered inside the viewport
-      // },
     },
     plugins: [data_plugins],
   });
   chart_count.push(nr_day);
 }
-
 function fetchData(url, city) {
   return fetch(`${url}?q=${city}&appid=${API_KEY}&units=${UNITS}`).then(
     function (response) {
