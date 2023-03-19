@@ -269,11 +269,11 @@ function draw_chart(id, data, nr_day) {
         },
       },
       plugins: {
-        // tooltip: {
-        //   callbacks: {
-        //     label: (item) => `Temperatura: ${item.formattedValue} °C`,
-        //   },
-        // },
+        tooltip: {
+          callbacks: {
+            label: (item) => `Temperatura: ${item.formattedValue} °C`,
+          },
+        },
         title: {
           display: true,
           text: data.forecastx[nr_day][0].date_day,
