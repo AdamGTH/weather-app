@@ -1,6 +1,7 @@
 const API_KEY = "74c606af1b6f26de866db286dabb1909";
 const UNITS = "metric";
 let city = "Kraków";
+let chart_tab = [];
 
 function image_src(ico) {
   return `https://raw.githubusercontent.com/erikflowers/weather-icons/bb80982bf1f43f2d57f9dd753e7413bf88beb9ed/svg/${ico}.svg`;
@@ -13,7 +14,6 @@ document.querySelector("form").addEventListener("submit", function (event) {
 
   Promise.all([fetchWeather(city), fetchForecast(city)])
     .then(transformData)
-    .then(draw_charts)
     .then(update)
     .catch(function (error) {
       console.log(error);
@@ -97,6 +97,22 @@ function update(data) {
   changePreassureHumidity(data);
   windDirectionAndStrength(data);
   changeForecast(data);
+
+  if (chart_tab.length == 0) draw_charts(data);
+  else
+    chart_tab[0].data.datasets[0].data = [
+      "30",
+      "30",
+      "30",
+      "30",
+      "30",
+      "30",
+      "30",
+      "30",
+    ];
+  console.log(chart_tab[0]);
+
+  //console.log(chart_tab.first_day.config);
 }
 
 function draw_charts(data) {
@@ -105,8 +121,6 @@ function draw_charts(data) {
   draw_chart("t_day", data, "third_day");
   draw_chart("fo_day", data, "fourth_day");
   draw_chart("fi_day", data, "fifth_day");
-
-  return data;
 }
 
 function transformData([weatherData, forecastData]) {
@@ -173,16 +187,17 @@ function ret(element) {
     temp: parseFloat(element.main.temp).toFixed(1),
   };
 }
-
 //Chart.defaults.borderColor = "gray"; // kolory siatki
 Chart.defaults.color = "black"; // ustawianie kolorów liczb na osi x i y
 Chart.register(ChartDataLabels);
+
 function draw_chart(id, data, nr_day) {
   let xValues = [];
   let yValues = [];
   let colors = [];
   let img_tab_ico = [];
   let img_weath = new Image();
+  let chart_current = {};
 
   for (i = 0; i < data.forecastx[nr_day].length; i++) {
     img_weath.src = data.forecastx[nr_day][i].img_src;
@@ -204,7 +219,6 @@ function draw_chart(id, data, nr_day) {
     id: "data_plugins",
     afterDatasetDraw(chart, args, options) {
       const { ctx } = chart;
-      console.log(chart.getDatasetMeta(0).data[i]);
       ctx.save();
       ctx.legend = options.legend;
       ctx.title = options.title;
@@ -220,14 +234,14 @@ function draw_chart(id, data, nr_day) {
       }
     },
   };
-  dt = [];
 
+  dt = [];
   for (i = 0; i < xValues.length; i++) {
     dt.push({ x: xValues[i], y: yValues[i] });
   }
 
   let id_chart = document.getElementById(id);
-  new Chart(id_chart, {
+  chart_current = new Chart(id_chart, {
     type: "bar",
 
     data: {
@@ -255,11 +269,11 @@ function draw_chart(id, data, nr_day) {
         },
       },
       plugins: {
-        tooltip: {
-          callbacks: {
-            label: (item) => `Temperatura: ${item.formattedValue} °C`,
-          },
-        },
+        // tooltip: {
+        //   callbacks: {
+        //     label: (item) => `Temperatura: ${item.formattedValue} °C`,
+        //   },
+        // },
         title: {
           display: true,
           text: data.forecastx[nr_day][0].date_day,
@@ -293,6 +307,8 @@ function draw_chart(id, data, nr_day) {
     },
     plugins: [data_plugins],
   });
+
+  chart_tab.push(chart_current);
 }
 
 function fetchData(url, city) {
