@@ -1,7 +1,8 @@
 const API_KEY = "74c606af1b6f26de866db286dabb1909";
 const UNITS = "metric";
 let city = "Kraków";
-let chart_tab = [];
+let chart_tab = {};
+let chart_count = [];
 
 function image_src(ico) {
   return `https://raw.githubusercontent.com/erikflowers/weather-icons/bb80982bf1f43f2d57f9dd753e7413bf88beb9ed/svg/${ico}.svg`;
@@ -98,30 +99,18 @@ function update(data) {
   windDirectionAndStrength(data);
   changeForecast(data);
 
-  if (chart_tab.length == 0) draw_charts(data);
-  else
-    chart_tab[0].data.datasets[0].data = [
-      "30",
-      "30",
-      "30",
-      "30",
-      "30",
-      "30",
-      "30",
-      "30",
-    ];
-  chart_tab[0].update();
-  console.log(chart_tab[0]);
+  if (chart_count.length == 0) draw_charts(data, false);
+  else draw_charts(data, true);
 
   //console.log(chart_tab.first_day.config);
 }
 
-function draw_charts(data) {
-  draw_chart("f_day", data, "first_day");
-  draw_chart("s_day", data, "sec_day");
-  draw_chart("t_day", data, "third_day");
-  draw_chart("fo_day", data, "fourth_day");
-  draw_chart("fi_day", data, "fifth_day");
+function draw_charts(data, update) {
+  draw_chart("f_day", data, "first_day", update);
+  draw_chart("s_day", data, "sec_day", update);
+  draw_chart("t_day", data, "third_day", update);
+  draw_chart("fo_day", data, "fourth_day", update);
+  draw_chart("fi_day", data, "fifth_day", update);
 }
 
 function transformData([weatherData, forecastData]) {
@@ -192,7 +181,7 @@ function ret(element) {
 Chart.defaults.color = "black"; // ustawianie kolorów liczb na osi x i y
 Chart.register(ChartDataLabels);
 
-function draw_chart(id, data, nr_day) {
+function draw_chart(id, data, nr_day, update) {
   let xValues = [];
   let yValues = [];
   let colors = [];
@@ -236,13 +225,11 @@ function draw_chart(id, data, nr_day) {
     },
   };
 
-  dt = [];
-  for (i = 0; i < xValues.length; i++) {
-    dt.push({ x: xValues[i], y: yValues[i] });
-  }
-
   let id_chart = document.getElementById(id);
-  chart_current = new Chart(id_chart, {
+
+  if (update == true) chart_tab[nr_day].destroy();
+
+  chart_tab[nr_day] = new Chart(id_chart, {
     type: "bar",
 
     data: {
@@ -308,8 +295,7 @@ function draw_chart(id, data, nr_day) {
     },
     plugins: [data_plugins],
   });
-
-  chart_tab.push(chart_current);
+  chart_count.push(nr_day);
 }
 
 function fetchData(url, city) {
