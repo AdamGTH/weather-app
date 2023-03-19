@@ -110,6 +110,7 @@ function update(data) {
       "30",
       "30",
     ];
+  chart_tab[0].update();
   console.log(chart_tab[0]);
 
   //console.log(chart_tab.first_day.config);
