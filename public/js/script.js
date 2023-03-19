@@ -101,8 +101,6 @@ function update(data) {
 
   if (chart_count.length == 0) draw_charts(data, false);
   else draw_charts(data, true);
-
-  //console.log(chart_tab.first_day.config);
 }
 
 function draw_charts(data, update) {
@@ -244,7 +242,7 @@ function draw_chart(id, data, nr_day, update) {
     },
 
     options: {
-      aspectRatio: 2, // skala
+      aspectRatio: 1, // skala
       scales: {
         y: {
           max: 50,
