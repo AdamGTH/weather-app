@@ -1,5 +1,5 @@
 # Introduce 
-##  url address to the view and using application:  https://weather-forec.herokuapp.com/
+##  Url address to the view and using application:  https://weather-forec.herokuapp.com/. When we do first run the application and will be write data to input form text then will be get answer and forecast's informations appers on the charts
 ##  This application presents to weather forecast with the requests through API https://openweathermap.org/
 ##  Application use the Promise() to get the informations about weather actual and weather forecast.
 ```js
